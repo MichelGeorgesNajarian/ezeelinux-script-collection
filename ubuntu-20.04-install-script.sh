@@ -56,7 +56,7 @@ echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable ma
 
 sudo apt update
 
-sudo apt install brave-browser
+sudo apt install -y brave-browser
 
 # Enabling Numlock from startup
 sudo apt-get install numlockx
