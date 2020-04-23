@@ -2,6 +2,7 @@
 
 # Ubuntu (GNOME) 20.04 generic setup script.
 # By Joe Collins. (www.ezeelinux.com GNU/General Public License version 2.0)
+# Modified by MichelGeorgesNajarian
 
 # Must have Gdebi!:
 
@@ -13,7 +14,8 @@ sudo apt install -yy openssh-server sshfs net-tools gedit-plugin-text-size \
 simplescreenrecorder libreoffice ubuntu-restricted-extras parole vlc gthumb \
 gnome-tweaks chrome-gnome-shell spell synaptic gufw brasero git mc \
 rhythmbox-plugin-cdrecorder gparted youtube-dl pavucontrol handbrake audacity \
-timeshift htop grsync lame asunder soundconverter
+timeshift htop grsync lame asunder soundconverter \
+maven python3 openjdk-11-jre-headless make valgrind gcc g++ npm nodejs
 
 
 # Install all local .deb packages, if available:
@@ -46,16 +48,28 @@ fi
 if [ -d "/home/$USER/.cache/mozilla" ]; then
 	rm -rf /home/$USER/.cache/mozilla
 fi
-mkdir /tmp/gc-install-tmp
-pushd /tmp/gc-install-tmp
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo gdebi -n google-chrome-stable_current_amd64.deb
-popd
-rm -rf /tmp/gc-install-tmp
+sudo apt install apt-transport-https curl
 
-# Install mp3gain:
+curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
 
-sudo snap install mp3gain
+echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+
+sudo apt update
+
+sudo apt install brave-browser
+
+# Enabling Numlock from startup
+sudo apt-get install numlockx
+sudo sed -i 's|^exit 0.*$|# Numlock enable\n[ -x /usr/bin/numlockx ] \&\& numlockx on\n\nexit 0|' /etc/rc.local
+/usr/bin/numlockx on
+
+# My VSCode settings
+wget https://raw.githubusercontent.com/MichelGeorgesNajarian/MyConfigFiles/master/VSCode/settings.json
+mv settings.json ~/.config/Code/User/settings.json
+
+# Git config
+git config --global user.name MichelGeorgesNajarian
+git config --global user.email miichel.georges@mgnajarian.com
 
 # Sound "pop and click" fix. Set sound card to stay powered on all the time:
 
