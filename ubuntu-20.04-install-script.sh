@@ -69,7 +69,7 @@ mv settings.json ~/.config/Code/User/settings.json
 
 # Git config
 git config --global user.name MichelGeorgesNajarian
-git config --global user.email miichel.georges@mgnajarian.com
+git config --global user.email michel.georges@mgnajarian.com
 
 # Sound "pop and click" fix. Set sound card to stay powered on all the time:
 
