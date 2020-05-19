@@ -64,8 +64,18 @@ sudo sed -i 's|^exit 0.*$|# Numlock enable\n[ -x /usr/bin/numlockx ] \&\& numloc
 /usr/bin/numlockx on
 
 # My VSCode settings
+if [ -d "./settings.json" ]; then
+	rm settings.json
+fi
 wget https://raw.githubusercontent.com/MichelGeorgesNajarian/MyConfigFiles/master/VSCode/settings.json
 mv settings.json ~/.config/Code/User/settings.json
+
+# My Vim settings
+if [ -d "./.vimrc" ]; then
+	rm .vimrc
+fi
+wget https://raw.githubusercontent.com/MichelGeorgesNajarian/MyConfigFiles/master/vim/.vimrc
+mv .vimrc ~/.vimrc
 
 # Git config
 git config --global user.name MichelGeorgesNajarian
