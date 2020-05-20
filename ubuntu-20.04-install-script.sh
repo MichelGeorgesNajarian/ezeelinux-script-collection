@@ -80,6 +80,7 @@ mv .vimrc ~/.vimrc
 # Git config
 git config --global user.name MichelGeorgesNajarian
 git config --global user.email michel.georges@mgnajarian.com
+git config --global core.editor vim
 
 # Sound "pop and click" fix. Set sound card to stay powered on all the time:
 
